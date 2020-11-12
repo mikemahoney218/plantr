@@ -19,7 +19,7 @@
 #' Example values: Alabama, Colorado, Alberta.
 #' @param county Returns plants that are present in the specified county.
 #' Example values (for the state of Colorado): Adams, Larimer, Yuma.
-#' @param nativityIntroducedSelected,nativityNativeSelected Only one of these
+#' @param introduced,native Only one of these
 #' parameters may be specified. A list of acceptable values is included below.
 #' @param federal_noxious Returns only plants that have the specified federal
 #' noxious status. Current statuses are "Noxious Weed" (`nw`), "Quarantine"
@@ -49,7 +49,7 @@
 #' data frame with fewer nested layers? Passed to [jsonlite::fromJSON].
 #'
 #' @section Nativity status:
-#' Only one of `nativityIntroducedSelected` and `nativityNativeSelected` may be
+#' Only one of `introduced` and `native` may be
 #' specified in a single API call, as filtering for only introduced species in a
 #' region necessarily excludes native species in that region.
 #'
@@ -84,8 +84,8 @@ ptr_search <- function(symbol = NULL,
                        common_name = NULL,
                        state_province = NULL,
                        county = NULL,
-                       nativityIntroducedSelected = NULL,
-                       nativityNativeSelected = NULL,
+                       introduced = NULL,
+                       native = NULL,
                        federal_noxious = NULL,
                        state_noxious = NULL,
                        federal_te = NULL,
@@ -93,10 +93,10 @@ ptr_search <- function(symbol = NULL,
                        basic = TRUE,
                        flatten = TRUE) {
 
-  if (sum(is.null(nativityIntroducedSelected),
-          is.null(nativityNativeSelected)) == 0) {
-    stop("Can only specify one of nativityIntroducedSelected and",
-         "nativityNativeSelected -- otherwise, all species are excluded.")
+  if (sum(is.null(introduced),
+          is.null(native)) == 0) {
+    stop("Can only specify one of introduced and",
+         "native -- otherwise, all species are excluded.")
   }
 
   if (!is.null(federal_te)) federal_te <- tolower(federal_te)
@@ -108,11 +108,8 @@ ptr_search <- function(symbol = NULL,
   }
 
   query_url <- "http://plants.usda.gov/api/plants/search"
-  # list_idx is used at the end to return a table, not a table in a list
-  list_idx <- 1
   if (basic) {
     query_url <- paste0(query_url, "/basic")
-    list_idx <- 2
   }
 
   # you can't have NULL elements in a vector, so wrapping all the arguments to
@@ -123,8 +120,8 @@ ptr_search <- function(symbol = NULL,
                   common_name = common_name,
                   state_province = state_province,
                   county = county,
-                  nativityIntroducedSelected = nativityIntroducedSelected,
-                  nativityNativeSelected = nativityNativeSelected,
+                  nativityIntroducedSelected = introduced,
+                  nativityNativeSelected = native,
                   federal_noxious = federal_noxious,
                   state_noxious = state_noxious,
                   federal_te = federal_te,

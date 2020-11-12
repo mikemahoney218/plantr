@@ -10,8 +10,8 @@ ptr_search(
   common_name = NULL,
   state_province = NULL,
   county = NULL,
-  nativityIntroducedSelected = NULL,
-  nativityNativeSelected = NULL,
+  introduced = NULL,
+  native = NULL,
   federal_noxious = NULL,
   state_noxious = NULL,
   federal_te = NULL,
@@ -39,7 +39,7 @@ Example values: Alabama, Colorado, Alberta.}
 \item{county}{Returns plants that are present in the specified county.
 Example values (for the state of Colorado): Adams, Larimer, Yuma.}
 
-\item{nativityIntroducedSelected, nativityNativeSelected}{Only one of these
+\item{introduced, native}{Only one of these
 parameters may be specified. A list of acceptable values is included below.}
 
 \item{federal_noxious}{Returns only plants that have the specified federal
@@ -86,7 +86,7 @@ If more detailed records are required, please narrow the search criteria.
 }
 \section{Nativity status}{
 
-Only one of \code{nativityIntroducedSelected} and \code{nativityNativeSelected} may be
+Only one of \code{introduced} and \code{native} may be
 specified in a single API call, as filtering for only introduced species in a
 region necessarily excludes native species in that region.
 
