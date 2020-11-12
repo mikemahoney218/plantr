@@ -1,0 +1,58 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# plantr
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![R-CMD-check](https://github.com/mikemahoney218/plantr/workflows/R-CMD-check/badge.svg)](https://github.com/mikemahoney218/plantr/actions)
+<!-- badges: end -->
+
+The goal of plantr is to provide a simple R wrapper around the 
+[USDA PLANTS Database](https://plants.sc.egov.usda.gov/java/citePlants) API,
+allowing users to easily download data on plant species as a part of their 
+regular workflow. 
+
+## Installation
+
+You can install the development version of plantr with:
+
+``` r
+remotes::install_github("mikemahoney218/plantr")
+```
+
+## Usage
+
+`plantr` is a little seedling of a package at the moment, without much in the 
+way of higher-order functions. With that said, the main workhorse of the package
+is already implemented as `ptr_search`, letting you search the PLANTS Database
+directly from R. Searching the basic API (which returns data on plant names and
+USDA symbols) is as simple as:
+
+```{r}
+library(plantr)
+
+ptr_search(common_name = "balsam fir")
+```
+
+The full API may also be searched by setting `basic` to `FALSE`. Note that this 
+example uses a single USDA plant symbol in order to speed up processing time:
+
+```{r}
+ptr_search(symbol = "ABBAB", basic = FALSE)
+```
+
+Please note that `plantr` is still in an experimental phase, and breaking 
+changes may happen to any function as development continues.

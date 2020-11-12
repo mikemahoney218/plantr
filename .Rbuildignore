@@ -1,0 +1,8 @@
+^plantr\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^dev\.Rmd$
+^README\.Rmd$
+^_pkgdown\.yml$
+^codecov\.yml$
+.github
