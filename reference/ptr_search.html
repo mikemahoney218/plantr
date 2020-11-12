@@ -135,8 +135,8 @@ If more detailed records are required, please narrow the search criteria.</p>
   common_name <span class='op'>=</span> <span class='cn'>NULL</span>,
   state_province <span class='op'>=</span> <span class='cn'>NULL</span>,
   county <span class='op'>=</span> <span class='cn'>NULL</span>,
-  nativityIntroducedSelected <span class='op'>=</span> <span class='cn'>NULL</span>,
-  nativityNativeSelected <span class='op'>=</span> <span class='cn'>NULL</span>,
+  introduced <span class='op'>=</span> <span class='cn'>NULL</span>,
+  native <span class='op'>=</span> <span class='cn'>NULL</span>,
   federal_noxious <span class='op'>=</span> <span class='cn'>NULL</span>,
   state_noxious <span class='op'>=</span> <span class='cn'>NULL</span>,
   federal_te <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -177,7 +177,7 @@ Example values: Alabama, Colorado, Alberta.</p></td>
 Example values (for the state of Colorado): Adams, Larimer, Yuma.</p></td>
     </tr>
     <tr>
-      <th>nativityIntroducedSelected, nativityNativeSelected</th>
+      <th>introduced, native</th>
       <td><p>Only one of these
 parameters may be specified. A list of acceptable values is included below.</p></td>
     </tr>
@@ -234,7 +234,7 @@ data frame with fewer nested layers? Passed to <a href='https://rdrr.io/pkg/json
 
     
 
-<p>Only one of <code>nativityIntroducedSelected</code> and <code>nativityNativeSelected</code> may be
+<p>Only one of <code>introduced</code> and <code>native</code> may be
 specified in a single API call, as filtering for only introduced species in a
 region necessarily excludes native species in that region.</p>
 <p>Valid values for these fields are:</p><ul>
