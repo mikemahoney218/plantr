@@ -64,6 +64,10 @@
 #' * `spm`: St. Pierre and Miquelon (France)
 #' * `na`: North America
 #'
+#' Specifying `introduced = l48`, for example, will return a list of introduced
+#' species within the lower 48 states, while `native = Hi` will return a list of
+#' plants native to Hawaii.
+#'
 #' @name ptr_search
 #'
 #' @return A data frame containing the data returned by the API call requested.
