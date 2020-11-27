@@ -79,7 +79,6 @@
 #'
 #' # Get full results for the same query:
 #' ptr_search(common_name = "balsam fir", basic = FALSE)
-#'
 #' }
 #'
 #' @export
@@ -96,11 +95,14 @@ ptr_search <- function(symbol = NULL,
                        state_te = NULL,
                        basic = TRUE,
                        flatten = TRUE) {
-
-  if (sum(is.null(introduced),
-          is.null(native)) == 0) {
-    stop("Can only specify one of introduced and",
-         "native -- otherwise, all species are excluded.")
+  if (sum(
+    is.null(introduced),
+    is.null(native)
+  ) == 0) {
+    stop(
+      "Can only specify one of introduced and",
+      "native -- otherwise, all species are excluded."
+    )
   }
 
   if (!is.null(federal_te)) federal_te <- tolower(federal_te)
@@ -119,34 +121,42 @@ ptr_search <- function(symbol = NULL,
   # you can't have NULL elements in a vector, so wrapping all the arguments to
   # our API call in a vector, then making a list from that vector, ensures we're
   # only using provided arguments
-  query_args <- c(symbol = symbol,
-                  scientific_name = scientific_name,
-                  common_name = common_name,
-                  state_province = state_province,
-                  county = county,
-                  nativityIntroducedSelected = introduced,
-                  nativityNativeSelected = native,
-                  federal_noxious = federal_noxious,
-                  state_noxious = state_noxious,
-                  federal_te = federal_te,
-                  state_te = state_te)
+  query_args <- c(
+    symbol = symbol,
+    scientific_name = scientific_name,
+    common_name = common_name,
+    state_province = state_province,
+    county = county,
+    nativityIntroducedSelected = introduced,
+    nativityNativeSelected = native,
+    federal_noxious = federal_noxious,
+    state_noxious = state_noxious,
+    federal_te = federal_te,
+    state_te = state_te
+  )
   # Create a named list of all non-NULL arguments from the above step
   query_args <- lapply(query_args, function(x) x)
 
   query_url <- httr::modify_url(query_url,
-                                query = query_args)
+    query = query_args
+  )
 
-  res <- httr::GET(query_url,
-                   httr::add_headers(accept = "application/json"))
+  res <- httr::GET(
+    query_url,
+    httr::add_headers(accept = "application/json")
+  )
 
   res <- jsonlite::fromJSON(httr::content(res, as = "text"),
-                            flatten = flatten)[[1]]
+    flatten = flatten
+  )[[1]]
 
   if (length(res) == 2 && !basic) {
     # This warning is returned as data by the USDA, so we need to raise it as a
     # warning on our own
-    warning("This is basic search. To see more information narrow your search ",
-    "or do a full search.")
+    warning(
+      "This is basic search. To see more information narrow your search ",
+      "or do a full search."
+    )
   }
 
   return(res[[length(res)]])

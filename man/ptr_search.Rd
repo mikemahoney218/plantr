@@ -102,6 +102,10 @@ Valid values for these fields are:
 \item \code{spm}: St. Pierre and Miquelon (France)
 \item \code{na}: North America
 }
+
+Specifying \code{introduced = l48}, for example, will return a list of introduced
+species within the lower 48 states, while \code{native = Hi} will return a list of
+plants native to Hawaii.
 }
 
 \examples{
